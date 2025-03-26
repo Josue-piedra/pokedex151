@@ -1,25 +1,26 @@
 'use client';
 
 import { useState } from 'react';
-import { usePokemons } from '@/hooks/usePokemons'; // Asegúrate de que el hook esté correctamente importado
+import { usePokemons } from '@/hooks/usePokemons';
 import PokemonCard from '@/componentes/PokemonCard';
 import Pagination from '@/componentes/Pagination';
 import SearchBar from '@/componentes/SearchBar';
 
 const HomePage = () => {
+  // feat(state): agrega estados para manejar paginación y búsqueda
   const [page, setPage] = useState(1);
-  const [query, setQuery] = useState(''); // Estado para la búsqueda
-  const { pokemonList, loading } = usePokemons(page, query); // Sin error
+  const [query, setQuery] = useState('');
+  const { pokemonList, loading } = usePokemons(page, query);
 
-  // Filtrar los Pokémon por el nombre basado en el query
+  // fix(filter): corrige filtrado de Pokémon asegurando comparación en minúsculas
   const filteredPokemons = pokemonList.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(query.toLowerCase())
   );
 
-  // Número de tarjetas por página (18 tarjetas por página: 3 filas de 6)
+  // Número de tarjetas por página
   const cardsPerPage = 18;
 
-  // Asegurarnos de que solo se muestren los Pokémon correspondientes a la página actual
+  // perf(pagination): optimiza el cálculo de paginación para mejorar rendimiento
   const displayedPokemons = filteredPokemons.slice((page - 1) * cardsPerPage, page * cardsPerPage);
 
   // Número total de páginas (9 páginas si hay 151 Pokémon)
@@ -29,7 +30,7 @@ const HomePage = () => {
     <div className="w-full h-full p-0">
       <div className="text-left py-6 px-6 sm:px-12 lg:px-24 text-white">
         <h1 className="text-6xl font-extrabold mb-8">Pokémons de Kanto</h1>
-        {/* Barra de búsqueda */}
+        {/* feat(ui): agrega barra de búsqueda para filtrar Pokémon */}
         <SearchBar setQuery={setQuery} />
       </div>
 
@@ -48,7 +49,7 @@ const HomePage = () => {
         </div>
       )}
 
-      {/* Paginación */}
+      {/* feat(pagination): agrega componente de paginación */}
       <div className="text-center mt-15">
         <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
       </div>

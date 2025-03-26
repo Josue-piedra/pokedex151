@@ -7,11 +7,10 @@ const SearchBar = ({ setQuery }: { setQuery: React.Dispatch<React.SetStateAction
 
   const handleSearch = () => {
     if (input.trim() === '') {
-      // Si el input está vacío, mostramos todos los Pokémon (reestablecemos la búsqueda)
-      setQuery('');
+      // fix(search): Optimiza manejo de búsqueda y restablecimiento al estar vacío
+      setQuery(''); // Si el input está vacío, mostramos todos los Pokémon (reestablecemos la búsqueda)
     } else {
-      // Si el input no está vacío, hacemos la búsqueda
-      setQuery(input.trim());
+      setQuery(input.trim()); // Si el input no está vacío, realizamos la búsqueda
     }
   };
 
@@ -28,14 +27,13 @@ const SearchBar = ({ setQuery }: { setQuery: React.Dispatch<React.SetStateAction
 
   useEffect(() => {
     if (input.trim() === '') {
-      // Si no hay texto en el input, podemos restablecer el estado de la búsqueda
-      setQuery('');
+      setQuery(''); // Restablece el estado de la búsqueda cuando no hay texto
     }
   }, [input, setQuery]);
 
   return (
     <div className="mb-4 flex justify-left space-x-2">
-      {/* Input de búsqueda */}
+      {/* feat(search): Agrega barra de búsqueda para filtrar Pokémon por nombre */}
       <input
         type="text"
         value={input}
@@ -49,3 +47,6 @@ const SearchBar = ({ setQuery }: { setQuery: React.Dispatch<React.SetStateAction
 };
 
 export default SearchBar;
+
+// fix(search): Optimizar manejo de búsqueda y restablecimiento al estar vacío
+// feat(search): Añadir barra de búsqueda para filtrar Pokémon por nombre

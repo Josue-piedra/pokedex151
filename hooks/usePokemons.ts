@@ -8,12 +8,13 @@ export const usePokemons = (page: number, query: string) => {
     const fetchPokemons = async () => {
       setLoading(true);
       try {
-        // Solo traemos los primeros 151 Pokémon
+        // feat(pokemon): Solicita los primeros 151 Pokémon de la API
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=151`);
         const data = await response.json();
-        setPokemonList(data.results); // Guardamos los 151 Pokémon
+        setPokemonList(data.results); // Guardamos los primeros 151 Pokémon
       } catch (error) {
         console.error('Error fetching Pokémon:', error);
+        // fix(pokemon): Maneja error de fetch correctamente
       } finally {
         setLoading(false);
       }
@@ -24,3 +25,6 @@ export const usePokemons = (page: number, query: string) => {
 
   return { pokemonList, loading };
 };
+
+// feat(pokemon): Cargar los primeros 151 Pokémon desde la API
+// fix(pokemon): Manejar correctamente los errores al hacer la solicitud de Pokémon

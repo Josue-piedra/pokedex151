@@ -7,10 +7,10 @@ interface PokemonDetailsProps {
 const PokemonDetailsPage = ({ pokemon }: PokemonDetailsProps) => {
   return (
     <div className="p-6">
-      {/* NOMBRE DEL POKÉMON */}
+      {/* feat(ui): Muestra nombre del Pokémon */}
       <h1 className="text-4xl font-bold capitalize mb-4">{pokemon.name}</h1>
 
-      {/* TIPOS */}
+      {/* feat(ui): Agrega lista de tipos de Pokémon */}
       <div className="mb-4">
         <h2 className="text-xl font-semibold">Tipos:</h2>
         <ul>
@@ -20,14 +20,14 @@ const PokemonDetailsPage = ({ pokemon }: PokemonDetailsProps) => {
         </ul>
       </div>
 
-      {/* ALTURA Y PESO */}
+      {/* feat(ui): Muestra altura y peso del Pokémon */}
       <div className="mb-4">
         <h2 className="text-xl font-semibold">Altura y Peso:</h2>
         <p className="text-lg"><strong>Altura:</strong> {pokemon.height} dm</p>
         <p className="text-lg"><strong>Peso:</strong> {pokemon.weight} hg</p>
       </div>
 
-      {/* ESTADÍSTICAS */}
+      {/* feat(ui): Muestra estadísticas del Pokémon */}
       <div className="mb-4">
         <h2 className="text-xl font-semibold">Estadísticas:</h2>
         <ul>
@@ -39,7 +39,7 @@ const PokemonDetailsPage = ({ pokemon }: PokemonDetailsProps) => {
         </ul>
       </div>
 
-      {/* MOVIMIENTOS */}
+      {/* feat(ui): Muestra los primeros 10 movimientos del Pokémon */}
       <div>
         <h2 className="text-xl font-semibold">Movimientos:</h2>
         <ul>
@@ -52,6 +52,7 @@ const PokemonDetailsPage = ({ pokemon }: PokemonDetailsProps) => {
   );
 };
 
+// feat(data-fetching): Obtiene detalles del Pokémon desde la API
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as { id: string };
 
@@ -73,3 +74,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default PokemonDetailsPage;
+
+// feat(ui): Mostrar detalles del Pokémon, incluyendo tipo, altura, peso, estadísticas y movimientos
+// feat(data-fetching): Obtener detalles del Pokémon desde la API de PokeAPI

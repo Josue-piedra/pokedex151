@@ -5,13 +5,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
       <head>
+        {/* feat(seo): Agrega meta etiquetas para mejorar SEO y accesibilidad */}
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Pokedex Kanto - La mejor colección de Pokémon de la región de Kanto" />
         <title>Pokedex Kanto</title>
       </head>
       <body className="bg-gray-900 text-gray-300 min-h-screen flex flex-col">
-        {/* 🔹 ENCABEZADO  */}
+        {/* feat(layout): Añade estructura base con encabezado, contenido y pie de página */}
         <header className="p-6 bg-gray-800 text-white text-center shadow-md flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-3">
             {/* Ruta relativa a la imagen que está en 'public/images/1033032.png' */}
@@ -20,10 +21,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </Link>
         </header>
 
-        {/* 🔹 CONTENIDO PRINCIPAL */}
+        {/* style(ui): Aplica estilos con Tailwind para mejor diseño responsivo */}
         <main className="flex-1 container mx-auto p-6">{children}</main>
 
-        {/* 🔹 PIE DE PÁGINA */}
+        {/* feat(footer): Agrega enlaces a PokéAPI y GitHub en el pie de página */}
         <footer className="p-6 bg-gray-800 text-white text-center">
           <p className="text-sm">© {new Date().getFullYear()} Pokedex Kanto</p>
           <div className="flex justify-center space-x-6 mt-2">
@@ -35,3 +36,5 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
+
+// feat(layout): Añadir la estructura base para la página (encabezado, contenido y pie de página)
