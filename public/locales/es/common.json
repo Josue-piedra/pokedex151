@@ -1,0 +1,23 @@
+{
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "of": "de",
+    "search_placeholder": "Busca un Pokémon...",
+    "pokedexTitle": "Pokédex de Kanto",
+    "shinyMode": "Modo Shiny",
+    "normalMode": "Modo Normal",
+    "description": "Descripción",
+    "loadingDescription": "Cargando descripción...",
+    "errorLoadingDescription": "Error al cargar la descripción.",
+    "descriptionNotAvailable": "Descripción no disponible.",
+    "abilities": "Habilidades",
+    "stats": "Estadísticas",
+    "moves": "Movimientos",
+    "basicInfo": "Información Básica",
+    "height": "Altura",
+    "weight": "Peso",
+    "baseExperience": "Experiencia Base",
+    "types": "Tipos",
+    "home": "Inicio",
+    "errorLoadingSpeciesData": "Error al cargar los datos de la especie"
+}

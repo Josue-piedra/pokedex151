@@ -1,9 +1,15 @@
+// Layout.tsx
+
 import './globals.css';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '@/componentes/LanguageSwitcher'; // Asegúrate de importar el LanguageSwitcher
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const { i18n } = useTranslation();  // Usamos useTranslation para acceder a la configuración de idioma
+
   return (
-    <html lang="es">
+    <html lang={i18n.language}> {/* Establece dinámicamente el idioma según el contexto */}
       <head>
         {/* feat(seo): Agrega meta etiquetas para mejorar SEO y accesibilidad */}
         <meta charSet="UTF-8" />
@@ -24,12 +30,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {/* style(ui): Aplica estilos con Tailwind para mejor diseño responsivo */}
         <main className="flex-1 container mx-auto p-6">{children}</main>
 
-        {/* feat(footer): Agrega enlaces a PokéAPI y GitHub en el pie de página */}
+        {/* feat(footer): Agrega enlaces a PokéAPI, GitHub y el LanguageSwitcher en el pie de página */}
         <footer className="p-6 bg-gray-800 text-white text-center">
           <p className="text-sm">© {new Date().getFullYear()} Pokedex Kanto</p>
           <div className="flex justify-center space-x-6 mt-2">
             <Link href="https://pokeapi.co/" target="_blank" className="hover:underline">PokéAPI</Link>
             <Link href="https://github.com/" target="_blank" className="hover:underline">GitHub</Link>
+          </div>
+
+          {/* LanguageSwitcher en el pie de página */}
+          <div className="mt-4">
+            <LanguageSwitcher />
           </div>
         </footer>
       </body>

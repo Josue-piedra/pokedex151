@@ -1,8 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next'; // Importar useTranslation
 
 const SearchBar = ({ setQuery }: { setQuery: React.Dispatch<React.SetStateAction<string>> }) => {
+  const { t } = useTranslation('common'); // Usamos 'common' para acceder a las traducciones
+
   const [input, setInput] = useState('');
 
   const handleSearch = () => {
@@ -40,7 +43,7 @@ const SearchBar = ({ setQuery }: { setQuery: React.Dispatch<React.SetStateAction
         onChange={handleChange}
         onKeyDown={handleKeyDown}  // Ejecuta la búsqueda cuando presionas Enter
         className="w-80 p-2 rounded-md border border-gray-700 bg-gray-800 text-white"
-        placeholder="Busca un Pokémon..."
+        placeholder={t('search_placeholder')} // Traducción del placeholder
       />
     </div>
   );

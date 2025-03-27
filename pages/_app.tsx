@@ -1,9 +1,10 @@
-import '@/app/globals.css';
+import { appWithTranslation } from 'next-i18next'; // Importa appWithTranslation
+import '@/app/globals.css'; // Tu archivo de estilos globales
 
 function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   return <Component {...pageProps} />;
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp); // Envuelve tu aplicación con appWithTranslation
 
-// feat(app): configura la estructura principal de la aplicación y global styles
+//feat(i18n): configura el proveedor de traducción en _app.tsx

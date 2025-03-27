@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslation } from 'react-i18next'; // Importa el hook useTranslation
 import Link from 'next/link';
 
 interface Pokemon {
@@ -9,6 +10,8 @@ interface Pokemon {
 }
 
 const PokemonCard = ({ pokemon }: { pokemon: Pokemon }) => {
+  const { t } = useTranslation('common'); // Usamos 'common' para acceder a las traducciones
+
   // fix(id): Corrige obtención del ID del Pokémon desde la URL
   let pokemonId: string | number = pokemon.id || '';
   if (!pokemonId && pokemon.url) {
@@ -21,7 +24,9 @@ const PokemonCard = ({ pokemon }: { pokemon: Pokemon }) => {
       {/* feat(routing): Agregar enlace a la página de detalles del Pokémon */}
       <Link href={`/pokemon/${pokemonId}`}>
         <div className="text-center flex flex-col justify-between h-full">
-          <h2 className="font-extrabold text-2xl text-white capitalize mb-4">{pokemon.name}</h2>
+          <h2 className="font-extrabold text-2xl text-white capitalize mb-4">
+            {t('pokemon_name', { name: pokemon.name })} {/* Traducción dinámica del nombre del Pokémon */}
+          </h2>
           {/* feat(ui): Muestra imagen del Pokémon usando la API de sprites */}
           <img
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
