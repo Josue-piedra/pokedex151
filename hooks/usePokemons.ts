@@ -12,14 +12,26 @@ export const usePokemons = (page: number, query: string) => {
     const fetchPokemons = async () => {
       setLoading(true);
       setError(null); // Resetear error al comenzar una nueva búsqueda
+      const limit = 18; // Puedes ajustar cuántos Pokémon quieres por página
+      const offset = (page - 1) * limit; // Paginación basada en la página actual
+
       try {
-        // feat(pokemon): Solicita los primeros 151 Pokémon de la API
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=151`);
+        // Si hay una búsqueda, incluye el parámetro 'search'
+        let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
+        if (query.trim()) {
+          url = `https://pokeapi.co/api/v2/pokemon/${query.toLowerCase()}`;
+        }
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error(t('fetch_error')); // Traducción del error
         }
         const data = await response.json();
-        setPokemonList(data.results); // Guardamos los primeros 151 Pokémon
+        if (data.results) {
+          setPokemonList(data.results); // Guardamos los resultados si hay
+        } else {
+          // Si la búsqueda no devuelve resultados, lanzamos un error
+          setError(t('pokemon_not_found')); 
+        }
       } catch (error) {
         setError(t('fetch_error')); // Asignamos el mensaje de error traducido
         console.error('Error fetching Pokémon:', error);
@@ -29,10 +41,10 @@ export const usePokemons = (page: number, query: string) => {
     };
 
     fetchPokemons();
-  }, [page, query]); // Si cambia la página o la búsqueda, vuelve a hacer la solicitud
+  }, [page, query, t]); // Añadir 't' como dependencia para manejar cambios en las traducciones
 
   return { pokemonList, loading, error };
 };
 
-// feat(pokemon): Cargar los primeros 151 Pokémon desde la API
-// fix(pokemon): Manejar correctamente los errores al hacer la solicitud de Pokémon
+// feat(pokemon): Solicitar Pokémon con paginación y búsqueda por nombre
+// fix(pokemon): Manejar errores de forma clara y proporcionar retroalimentación de error

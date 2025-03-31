@@ -22,7 +22,7 @@ const PokemonCard = ({ pokemon }: { pokemon: Pokemon }) => {
   return (
     <div className="bg-gray-800 p-4 rounded-lg shadow-2xl hover:scale-105 transition-all transform w-full h-72 sm:h-80 flex flex-col justify-between m-4">
       {/* feat(routing): Agregar enlace a la página de detalles del Pokémon */}
-      <Link href={`/pokemon/${pokemonId}`}>
+      <Link href={`/pokemon/${pokemonId}`} aria-label={t('viewDetails', { name: pokemon.name })}>
         <div className="text-center flex flex-col justify-between h-full">
           <h2 className="font-extrabold text-2xl text-white capitalize mb-4">
             {t('pokemon_name', { name: pokemon.name })} {/* Traducción dinámica del nombre del Pokémon */}

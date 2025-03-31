@@ -37,7 +37,10 @@ const PokemonPage = ({ pokemon, nextId, prevId }: PokemonPageProps) => {
   }, [pokemon, t]);
 
   const toggleShiny = () => setIsShiny((prev) => !prev);
-  const getSprite = (type: 'front' | 'back') => isShiny ? pokemon.sprites[`${type}_shiny`] : pokemon.sprites[`${type}_default`];
+
+  const getSprite = (type: 'front' | 'back') => isShiny
+    ? pokemon.sprites[`${type}_shiny`]
+    : pokemon.sprites[`${type}_default`];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-200 flex flex-col items-center p-8 w-full">
@@ -48,11 +51,22 @@ const PokemonPage = ({ pokemon, nextId, prevId }: PokemonPageProps) => {
       <div className="bg-gray-700 p-6 rounded-xl shadow-lg flex flex-col items-center space-y-4 w-full max-w-5xl">
         <h2 className="text-3xl font-semibold capitalize">{pokemon.name} #{pokemon.id}</h2>
         <div className="flex justify-center space-x-10 w-full">
-          <img src={getSprite('front')} alt={pokemon.name} className="w-64 h-64 object-contain" />
-          <img src={getSprite('back')} alt={pokemon.name} className="w-64 h-64 object-contain" />
+          <img
+            src={getSprite('front')}
+            alt={`${pokemon.name} (${isShiny ? 'Shiny' : 'Normal'}) front view`}
+            className="w-64 h-64 object-contain"
+          />
+          <img
+            src={getSprite('back')}
+            alt={`${pokemon.name} (${isShiny ? 'Shiny' : 'Normal'}) back view`}
+            className="w-64 h-64 object-contain"
+          />
         </div>
 
-        <button onClick={toggleShiny} className="px-6 py-2 bg-gray-500 hover:bg-gray-600 rounded-lg shadow-md transition w-64 mt-4">
+        <button
+          onClick={toggleShiny}
+          className="px-6 py-2 bg-gray-500 hover:bg-gray-600 rounded-lg shadow-md transition w-64 mt-4"
+        >
           {isShiny ? t('normalMode') : t('shinyMode')}
         </button>
 
@@ -61,7 +75,7 @@ const PokemonPage = ({ pokemon, nextId, prevId }: PokemonPageProps) => {
           {loading ? (
             <p className="text-gray-400">{t('loadingDescription')}</p>
           ) : error ? (
-            <p className="text-red-500">{t('errorLoadingDescription')}</p>
+            <p className="text-red-500">{error}</p> // Mostrar error específico
           ) : (
             <p className="text-gray-300">
               {speciesData?.flavor_text_entries?.find((entry: any) => entry.language.name === 'es')?.flavor_text || t('descriptionNotAvailable')}

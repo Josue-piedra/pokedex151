@@ -9,12 +9,8 @@ const SearchBar = ({ setQuery }: { setQuery: React.Dispatch<React.SetStateAction
   const [input, setInput] = useState('');
 
   const handleSearch = () => {
-    if (input.trim() === '') {
-      // fix(search): Optimiza manejo de búsqueda y restablecimiento al estar vacío
-      setQuery(''); // Si el input está vacío, mostramos todos los Pokémon (reestablecemos la búsqueda)
-    } else {
-      setQuery(input.trim()); // Si el input no está vacío, realizamos la búsqueda
-    }
+    // Si el input está vacío, restablecemos la búsqueda
+    setQuery(input.trim() || ''); 
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,8 +25,9 @@ const SearchBar = ({ setQuery }: { setQuery: React.Dispatch<React.SetStateAction
   };
 
   useEffect(() => {
+    // Si el input está vacío, restablecemos el estado de la búsqueda
     if (input.trim() === '') {
-      setQuery(''); // Restablece el estado de la búsqueda cuando no hay texto
+      setQuery('');
     }
   }, [input, setQuery]);
 
@@ -44,6 +41,7 @@ const SearchBar = ({ setQuery }: { setQuery: React.Dispatch<React.SetStateAction
         onKeyDown={handleKeyDown}  // Ejecuta la búsqueda cuando presionas Enter
         className="w-80 p-2 rounded-md border border-gray-700 bg-gray-800 text-white"
         placeholder={t('search_placeholder')} // Traducción del placeholder
+        aria-label={t('searchPlaceholder')} // Agrega accesibilidad al campo de búsqueda
       />
     </div>
   );

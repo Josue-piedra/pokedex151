@@ -6,6 +6,7 @@ import { usePokemons } from '@/hooks/usePokemons';
 import PokemonCard from '@/componentes/PokemonCard';
 import Pagination from '@/componentes/Pagination';
 import SearchBar from '@/componentes/SearchBar';
+import LanguageSwitcher from '@/componentes/LanguageSwitcher';  // Importamos el LanguageSwitcher
 
 const HomePage = () => {
   const { t } = useTranslation('common');  // Usamos 'common' como el archivo de traducción
@@ -13,6 +14,7 @@ const HomePage = () => {
   const [query, setQuery] = useState('');
   const { pokemonList, loading } = usePokemons(page, query);
 
+  // Filtrar los Pokémon por nombre
   const filteredPokemons = pokemonList.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(query.toLowerCase())
   );
@@ -24,7 +26,10 @@ const HomePage = () => {
   return (
     <div className="w-full h-full p-0">
       <div className="text-left py-6 px-6 sm:px-12 lg:px-24 text-white">
-        <h1 className="text-6xl font-extrabold mb-8">{t('kantoPokemons')}</h1> {/* Traducimos el título */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-6xl font-extrabold">{t('kantoPokemons')}</h1> {/* Traducimos el título */}
+          <LanguageSwitcher />  {/* Agregamos el LanguageSwitcher */}
+        </div>
         <SearchBar setQuery={setQuery} />
       </div>
 
